@@ -17,19 +17,29 @@
 </head>
 
 <body>
-  <main class="mt-5">
-    <div class="signin">
-      <div class="form-outline mb-4">
-        <img src="/img/login.png" class="signin">
-        <h4> Inciar Sesión </h4>
-        <label for="username">Email <input type="email" id="email" name="email" class="form-control " placeholder="Email" autofocus> </label> <br>
-        <label for="password">Contraseña <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña"> </label> <br> <br>
-
-        <button class="btn btn-primary" id="login"> Ingresar </button>
-
-      </div>
+  <main class="mt-5 signin text-center">
+    
+    <div class="form-outline mb-4">
+      <img src="/img/login.png" class="signin">
+      <h4> Inciar Sesión </h4>
       
+      <div class="form-floating">
+        <input type="email" class="form-control" id="email" placeholder="xd">
+        <label for="email">Email</label>
+      </div>
+      <span id="error_email" style="color: red"> </span> <br>
+      
+      <div class="form-floating">
+        <input type="password" class="form-control" id="password" placeholder="Password">
+        <label for="password">Contraseña</label>
+      </div>
+      <span id="error_password" style="color: red"> </span> <br>
+      <button class="w-50 btn btn-lg btn-ingresar" id="login"> Ingresar </button>
+
+      
+
     </div>
+      
   </main>
   <footer class="text-muted">
     <div class="container">

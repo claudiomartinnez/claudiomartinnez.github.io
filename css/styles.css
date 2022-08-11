@@ -188,3 +188,20 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+.error {
+  border-color: rgb(241, 74, 74);
+  
+}
+
+.btn-ingresar {
+  color: #fff;
+  background-color: #28b9a6;
+  border-color: #28b9a6;
+}
+
+.btn-ingresar:hover {
+  color: #fff;
+  background-color: #0d7466;
+  border-color: #0d7466;
+}
