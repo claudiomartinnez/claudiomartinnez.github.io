@@ -29,7 +29,16 @@ function login (){
     }
 
     if (email!=="" && contraseña!==""){
-        location.href='index.html';
+        Swal.fire({
+            title: 'Bienvenido/a',
+            confirmButtonColor: '#28b9a6',
+            confirmButtonText: 'Ok'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                location.href='index.html';
+            }
+          })
+        
 
     }
 
