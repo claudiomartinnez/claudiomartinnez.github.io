@@ -12,16 +12,6 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location = "products.html"
     });
 
-
-    //Boton de log-out
-
-    document.getElementById("logout").addEventListener("click", function() {
-        localStorage.clear()
-        location.href= "login.html"
-    });
-
-   
-    
     
 });
 
@@ -30,7 +20,4 @@ document.addEventListener("DOMContentLoaded", function(){
 if (localStorage.getItem("usuario")===null){
     location.href= "login.html"
 }
-
-
-
 

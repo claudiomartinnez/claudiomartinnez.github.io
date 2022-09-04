@@ -71,12 +71,8 @@ function showCategoriesList(){
     }
 }
 
-function sortAndShowCategories(sortCriteria, categoriesArray){
+function sortAndShowCategories(sortCriteria){
     currentSortCriteria = sortCriteria;
-
-    if(categoriesArray != undefined){
-        currentCategoriesArray = categoriesArray;
-    }
 
     currentCategoriesArray = sortCategories(currentSortCriteria, currentCategoriesArray);
 
