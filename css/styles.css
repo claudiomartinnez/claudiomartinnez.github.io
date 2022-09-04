@@ -206,5 +206,10 @@ a.custom-card:hover {
   border-color: #0d7466;
 }
 
+#logout {
+  color: #fff;
+  background-color: #28b9a6;
+  border-color: #28b9a6;
+}
   
 
