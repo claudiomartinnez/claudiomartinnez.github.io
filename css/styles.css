@@ -211,5 +211,15 @@ a.custom-card:hover {
   background-color: #28b9a6;
   border-color: #28b9a6;
 }
+
+.small-img{
+  cursor: pointer;
+  opacity: .7;
+}
+
+.small-img:hover{
+  opacity: 1;
+
+}
   
 

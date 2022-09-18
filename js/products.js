@@ -2,6 +2,12 @@ let minCost = undefined;
 let maxCost = undefined;
 let currentProductsArray = []
 
+
+function setProdID(id){
+  localStorage.setItem("prodID", id);
+  location.href = "product-info.html"
+}
+
 function showProductsList() {
   let htmlContentToAppend = "";
 
@@ -11,7 +17,7 @@ function showProductsList() {
             ((maxCost == undefined) || (maxCost != undefined && product.cost <= maxCost))){
     
       htmlContentToAppend += `
-          <div class="list-group-item list-group-item-action">
+          <div onclick="setProdID(${product.id})" class="list-group-item list-group-item-action cursor-active">
               <div class="row">
                   <div class="col-3">
                       <img src="${product.image}" alt="product image" class="img-thumbnail">
@@ -46,6 +52,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  document.getElementById("rangeFilterCost").addEventListener("click", function(){
+
+    minCost = document.getElementById("rangeFilterCostMin").value;
+    maxCost = document.getElementById("rangeFilterCostMax").value;
+
+    if ((minCost != undefined) && (minCost != "") && (minCost) >= 0){
+      minCost = minCost;
+    }
+    else{
+      minCost = undefined;
+    }
+
+    if ((maxCost != undefined) && (maxCost != "") && (maxCost) >= 0){
+      maxCost = maxCost;
+    }
+    else{
+      maxCost = undefined;
+    }
+
+    showProductsList();
+  
+  });
+
   document.getElementById("clearRangeFilter").addEventListener("click", function(){
     document.getElementById("rangeFilterCostMin").value = "";
     document.getElementById("rangeFilterCostMax").value = "";
@@ -55,28 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showProductsList();
 
-  });
-  document.getElementById("rangeFilterCost").addEventListener("click", function(){
-
-    minCost = document.getElementById("rangeFilterCostMin").value;
-    maxCost = document.getElementById("rangeFilterCostMax").value;
-
-    if ((minCost != undefined) && (minCost != "") && (parseInt(minCost)) >= 0){
-      minCost = parseInt(minCost);
-    }
-    else{
-      minCost = undefined;
-    }
-
-    if ((maxCost != undefined) && (maxCost != "") && (parseInt(maxCost)) >= 0){
-      maxCost = parseInt(maxCost);
-    }
-    else{
-      maxCost = undefined;
-    }
-
-    showProductsList();
-  
   });
 
   document.getElementById("sortAsc").addEventListener("click", function () {
@@ -133,6 +140,7 @@ document.addEventListener("DOMContentLoaded", () =>{
 
 })
 
+console.log(showProductsList())
 
 
 

@@ -41,13 +41,41 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="container" id="prod-info-container"></div>
+    <section style="background-color: #f7f6f6;">
+      <h4 class="text-dark mb-4 row d-flex justify-content-center">Comentarios</h4>
+      <div class="container my-5 py-5 text-dark" id="comments">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-12 col-lg-10 col-xl-8">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h4 class="text-dark">Comentarios</h4>
+            </div>
+          </div>  
+        </div>    
+      </div>      
+    </section>
+    <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+      <div class="d-flex flex-start w-100">
+        <div class="form-outline w-75">
+          <label class="form-floating mb-3" for="textAreaExample">Contanos tu opinión:</label>
+          <textarea class="form-control" id="textAreaExample" rows="4" style="background: #fff;" placeholder="Mensaje"></textarea>
+            <label for="score" class="mt-4 mb-4">Puntuacion:</label>
+            <select name="score" id="score">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+        </div>
+      </div>
+      <div class=" mt-2 pt-1">
+        <button type="button" class="btn btn-primary">Comentar</button>
+        <button type="button" class="btn btn-outline-primary ">Cancelar</button>
       </div>
     </div>
   </main>
-  <footer class="text-muted">
+  <footer class="text-muted" >
     <div class="container">
       <p class="float-end">
         <a href="#">Volver arriba</a>
