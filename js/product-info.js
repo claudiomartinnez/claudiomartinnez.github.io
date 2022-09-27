@@ -1,8 +1,14 @@
 let productInfo = undefined;
+let relatedProducts = undefined;
 let commentsArray = [];
 
-function showProductInfo(){
-  let productImg = productInfo.images
+function setProdID(id){
+  localStorage.setItem("prodID", id);
+  location.href = "product-info.html"
+}
+
+function showProductInfo() {
+  let productImg = productInfo.images;
   let htmlContentToAppend = `
     <section class="py-5">
       <div class="container px-4 px-lg-5 my-5">
@@ -66,7 +72,7 @@ function showProductInfo(){
             <div class = "d-flex">
             <button class="btn btn-outline-dark flex-shrink-0" type="button">
               <i class="fas fa-shopping-cart"></i>
-               Add to cart
+               Añadir al carrito
             </button>
             </div>                
           </div>
@@ -74,56 +80,53 @@ function showProductInfo(){
       </div>
     </section>`;
 
-  document.getElementById("prod-info-container").innerHTML = htmlContentToAppend;
-
+  document.getElementById("prod-info-container").innerHTML =
+    htmlContentToAppend;
 
   // Selector de imagenes
-  
+
   let mainImg = document.getElementById("mainImg");
   let img0 = document.getElementById("img0");
   let img1 = document.getElementById("img1");
   let img2 = document.getElementById("img2");
-  let img3 = document.getElementById("img3")
+  let img3 = document.getElementById("img3");
 
   img0.addEventListener("click", () => {
-    mainImg.src = productImg[0]
-    img0.classList.add("border-dark")
-    img1.classList.remove("border-dark")
-    img2.classList.remove("border-dark")
-    img3.classList.remove("border-dark")
-    
-  })
+    mainImg.src = productImg[0];
+    img0.classList.add("border-dark");
+    img1.classList.remove("border-dark");
+    img2.classList.remove("border-dark");
+    img3.classList.remove("border-dark");
+  });
 
   img1.addEventListener("click", () => {
-    mainImg.src = productImg[1]
-    img1.classList.add("border-dark")
-    img0.classList.remove("border-dark")
-    img2.classList.remove("border-dark")
-    img3.classList.remove("border-dark")
-    
-  })
+    mainImg.src = productImg[1];
+    img1.classList.add("border-dark");
+    img0.classList.remove("border-dark");
+    img2.classList.remove("border-dark");
+    img3.classList.remove("border-dark");
+  });
 
   img2.addEventListener("click", () => {
-    mainImg.src = productImg[2]
-    img2.classList.add("border-dark")
-    img0.classList.remove("border-dark")
-    img1.classList.remove("border-dark")
-    img3.classList.remove("border-dark")
-  })
+    mainImg.src = productImg[2];
+    img2.classList.add("border-dark");
+    img0.classList.remove("border-dark");
+    img1.classList.remove("border-dark");
+    img3.classList.remove("border-dark");
+  });
 
   img3.addEventListener("click", () => {
-    mainImg.src = productImg[3]
-    img3.classList.add("border-dark")
-    img0.classList.remove("border-dark")
-    img1.classList.remove("border-dark")
-    img2.classList.remove("border-dark")
-  })
-
+    mainImg.src = productImg[3];
+    img3.classList.add("border-dark");
+    img0.classList.remove("border-dark");
+    img1.classList.remove("border-dark");
+    img2.classList.remove("border-dark");
+  });
 }
 
-function showComments(){
+function showComments() {
   let htmlContentToAppend = "";
-  for (i=0; i < commentsArray.length; i++){
+  for (i = 0; i < commentsArray.length; i++) {
     let comment = commentsArray[i];
 
     htmlContentToAppend += `
@@ -132,7 +135,7 @@ function showComments(){
         <div class="d-flex flex-start">
           <div class="w-100">
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <h6 class="text-primary fw-bold mb-0">
+              <h6 class="text-primary mb-0">
               ${comment.user}
               <span class="text-dark ms-2">${comment.description}</span>
               </h6>
@@ -146,28 +149,39 @@ function showComments(){
           </div>
         </div>
       </div>
-    </div>`
-            
+    </div>`;
   }
 
-  document.getElementById("comments").innerHTML= htmlContentToAppend
-
-
+  document.getElementById("comments").innerHTML = htmlContentToAppend;
 }
 
-function showStar(score){
-  let addStar=``;
-  for (let i=1; i<=5; i++){
-    if (i<=score){
-      addStar += `<i class="fas fa-star checked"></i>`
-   
-    }
-    else {
-      addStar += `<i class="far fa-star "></i>`
+function showRelatedProducts() {
+  let htmlContentToAppend = "";
+  for (i = 0; i < relatedProducts.length; i++) {
+    let related = relatedProducts[i];
+    htmlContentToAppend += `
+      <div onclick="setProdID(${related.id})" class="col mx-auto container-fluid cursor-active-related">
+        <div class="card h-100">
+          <img src="${related.image}" class="card-img-top">
+        <div class="card-body text-center">
+          <h4 class="card-title ">${related.name}</h4>
+        </div>
+      </div>
+    </div>`
+  }
+  document.getElementById("related").innerHTML = htmlContentToAppend
+}
+
+function showStar(score) {
+  let addStar = ``;
+  for (let i = 1; i <= 5; i++) {
+    if (i <= score) {
+      addStar += `<i class="fas fa-star checked"></i>`;
+    } else {
+      addStar += `<i class="far fa-star "></i>`;
     }
   }
   return addStar;
-
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -175,18 +189,18 @@ document.addEventListener("DOMContentLoaded", () => {
   getJSONData(urlInfo).then(function (resultObj) {
     if (resultObj.status === "ok") {
       productInfo = resultObj.data;
-      showProductInfo()
+      relatedProducts= resultObj.data.relatedProducts;
+      showProductInfo();
+      showRelatedProducts();
     }
   });
 
-  let urlInfoComments = PRODUCT_INFO_COMMENTS_URL + localStorage.getItem("prodID") + EXT_TYPE;
-  getJSONData(urlInfoComments).then(function (resultObj){
-    if (resultObj.status === "ok"){
+  let urlInfoComments =
+    PRODUCT_INFO_COMMENTS_URL + localStorage.getItem("prodID") + EXT_TYPE;
+  getJSONData(urlInfoComments).then(function (resultObj) {
+    if (resultObj.status === "ok") {
       commentsArray = resultObj.data;
-      showComments()
-      
-    
+      showComments();
     }
-  })
-
+  });
 });

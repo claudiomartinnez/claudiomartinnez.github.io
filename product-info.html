@@ -30,11 +30,13 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
-            <label type="text" class="nav-link" id="usuario"></label>
-          </li>
-          <li class="nav-item">
-            <button class="btn btn-primary" href="login.html" id="logout">Cerrar Sesión</button>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="usuario" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+              <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+              <li><button class="dropdown-item" href="login.html" id="logout">Cerrar sesión</button></li>
+            </ul>
           </li>
         </ul>
       </div>
@@ -42,6 +44,15 @@
   </nav>
   <main>
     <div class="container" id="prod-info-container"></div>
+    <div class="my-3 pb-3">
+      <div class="container text-center mt-5 py-5">
+        <h3> Productos que te pueden interesar</h3>
+        <hr>
+      </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="related">
+
+    </div>
+    </div>
     <section style="background-color: #f7f6f6;">
       <h4 class="text-dark mb-4 row d-flex justify-content-center">Comentarios</h4>
       <div class="container my-5 py-5 text-dark" id="comments">
@@ -54,7 +65,7 @@
         </div>    
       </div>      
     </section>
-    <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+    <div class="card-footer py-3 border-0 ms-5" style="background-color: #f8f9fa;">
       <div class="d-flex flex-start w-100">
         <div class="form-outline w-75">
           <label class="form-floating mb-3" for="textAreaExample">Contanos tu opinión:</label>

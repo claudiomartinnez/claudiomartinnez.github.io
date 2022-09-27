@@ -206,11 +206,7 @@ a.custom-card:hover {
   border-color: #0d7466;
 }
 
-#logout {
-  color: #fff;
-  background-color: #28b9a6;
-  border-color: #28b9a6;
-}
+
 
 .small-img{
   cursor: pointer;
@@ -221,5 +217,13 @@ a.custom-card:hover {
   opacity: 1;
 
 }
+
+.cursor-active-related:hover {
+  cursor: pointer;
+  transition: 0.5s all;
+  opacity: .8;
+
+}
+
   
 
