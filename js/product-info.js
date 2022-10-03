@@ -16,46 +16,36 @@ function showProductInfo() {
           <div class="col-6" style= "min-width: 300px">
             <div class="row shadow-5">
               <div class="col-12 mb-1">
-                <div class="lightbox">
-                  <img
-                    id= "mainImg"
-                    src="${productImg[0]}"
-                    alt="Gallery main image 1"
-                    class="active w-100 border border-dark rounded"
-                  />
+              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
                 </div>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="${productImg[0]}" class="d-block w-100">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="${productImg[1]}" class="d-block w-100">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="${productImg[2]}" class="d-block w-100">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="${productImg[3]}" class="d-block w-100">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
               </div>
-              <div class="col-3 mt-1">
-                <img
-                  id= "img0"
-                  src="${productImg[0]}"
-                  alt="Gallery image 1"
-                  class="active w-100 border border-dark rounded small-img"
-                />
-              </div>
-              <div class="col-3 mt-1">
-                <img
-                  id= "img1"
-                  src="${productImg[1]}"
-                  alt="Gallery image 2"
-                  class="w-100 border rounded small-img"
-                />
-              </div>
-              <div class="col-3 mt-1">
-                <img
-                  id = "img2"
-                  src="${productImg[2]}"
-                  alt="Gallery image 3"
-                  class="w-100 border rounded small-img"
-                />
-              </div>
-              <div class="col-3 mt-1">
-                <img
-                  id = "img3"
-                  src="${productImg[3]}"
-                  alt="Gallery image 4"
-                  class="w-100 border rounded small-img"
-                />
               </div>
             </div>
           </div>
@@ -80,48 +70,9 @@ function showProductInfo() {
       </div>
     </section>`;
 
-  document.getElementById("prod-info-container").innerHTML =
-    htmlContentToAppend;
+  document.getElementById("prod-info-container").innerHTML = htmlContentToAppend;
 
-  // Selector de imagenes
 
-  let mainImg = document.getElementById("mainImg");
-  let img0 = document.getElementById("img0");
-  let img1 = document.getElementById("img1");
-  let img2 = document.getElementById("img2");
-  let img3 = document.getElementById("img3");
-
-  img0.addEventListener("click", () => {
-    mainImg.src = productImg[0];
-    img0.classList.add("border-dark");
-    img1.classList.remove("border-dark");
-    img2.classList.remove("border-dark");
-    img3.classList.remove("border-dark");
-  });
-
-  img1.addEventListener("click", () => {
-    mainImg.src = productImg[1];
-    img1.classList.add("border-dark");
-    img0.classList.remove("border-dark");
-    img2.classList.remove("border-dark");
-    img3.classList.remove("border-dark");
-  });
-
-  img2.addEventListener("click", () => {
-    mainImg.src = productImg[2];
-    img2.classList.add("border-dark");
-    img0.classList.remove("border-dark");
-    img1.classList.remove("border-dark");
-    img3.classList.remove("border-dark");
-  });
-
-  img3.addEventListener("click", () => {
-    mainImg.src = productImg[3];
-    img3.classList.add("border-dark");
-    img0.classList.remove("border-dark");
-    img1.classList.remove("border-dark");
-    img2.classList.remove("border-dark");
-  });
 }
 
 function showComments() {
