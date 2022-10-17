@@ -32,9 +32,9 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="usuario" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
-              <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
-              <li><button class="dropdown-item" href="login.html" id="logout">Cerrar sesión</button></li>
+              <li><a class="dropdown-item" href="cart.html" ><i class="fas fa-shopping-cart"></i> Mi carrito</a></li>
+              <li><a class="dropdown-item" href="my-profile.html"><i class="fas fa-user"></i> Mi perfil</a></li>
+              <li><button class="dropdown-item" href="login.html" id="logout"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</button></li>
             </ul>
           </li>
         </ul>
@@ -42,10 +42,76 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <section class="h-100 h-custom">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12">
+            <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+              <div class="card-body p-0">
+                <div class="row g-0">
+                  <div class="col-lg-12">
+                    <div class="p-5">
+                      <div class="d-flex justify-content-between align-items-center mb-5">
+                        <h1 class="fw-bold mb-0 text-black">Carrito de compras</h1>
+                      </div>
+                      <hr class="my-4">
+    
+                      <div id="cart-info">
+                        
+                      </div>
+    
+                      
+                    </div>
+                  </div>
+                  <div class="row-lg-4 bg-grey">
+                    <div class="p-5">
+    
+                      <h5 class="text-uppercase mb-3">Tipo de envío</h5>
+    
+                      <div class="mb-4 pb-2">
+                        <select class="form-control">
+                          <option value="1">Premium - 2 a 5 días (15%)</option>
+                          <option value="2">Express - 5 a 8 días (7%)</option>
+                          <option value="3">Standard - 12 a 15 días (5%)</option>
+                        </select>
+                      </div>
+    
+                      <h5 class="text-uppercase mb-3">Direccion de envío</h5>
+    
+                      <div class="mb-5">
+                        <div class="form-floating mb-2">
+                          <input type="text" class="form-control" id="calle" placeholder="Calle">
+                          <label for="text">Calle</label>
+                        </div>
+                        <div class="form-floating mb-2">
+                          <input type="number" class="form-control" id="numero-calle" placeholder="numero">
+                          <label for="number">Numero</label>
+                        </div>
+                        <div class="form-floating mb-2">
+                          <input type="text" class="form-control" id="esquina" placeholder="esquina">
+                          <label for="text">Esquina</label>
+                        </div>
+                      </div>
+    
+                      <hr class="my-4">
+    
+                      <div class="d-flex justify-content-between mb-5">
+                        <h5 class="text-uppercase">Total con envío</h5>
+                        <h5 id="total"></h5>
+                      </div>
+    
+                      <button type="button" class="btn btn-dark btn-block btn-lg"
+                        data-mdb-ripple-color="dark">Comprar</button>
+    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
     </div>
   </main>
   <footer class="text-muted">
