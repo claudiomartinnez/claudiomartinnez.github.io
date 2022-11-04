@@ -22,7 +22,7 @@ function showCartInfo(){
                 <i class="fas fa-minus"></i>
                 </button>
 
-                <input id="cantidad" min="1" name="quantity" value="${cart.count}" type="number" onchange="updateValue()"
+                <input id="cantidad"  name="quantity" value="${cart.count}" type="number" onchange="updateValue()"
                 class="form-control form-control-sm" />
 
                 <button class="btn btn-link px-2"
@@ -44,6 +44,9 @@ function showCartInfo(){
 
     document.getElementById("cart-info").innerHTML = htmlContentToAppend;
     document.getElementById("total").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
+    document.getElementById("subtotal2").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
+    showCostoEnvio()
+
 }
 
 
@@ -51,8 +54,86 @@ function updateValue(){
     let cantidad = document.getElementById("cantidad").value;
     subtotal = cantidad * cartInfo[0].unitCost;
     document.getElementById("subtotal").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
+    showCostoEnvio()
+    document.getElementById("subtotal2").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
     document.getElementById("total").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
 
+}
+
+function showCostoEnvio() {
+    let seleccionEnvio = document.getElementById("envio").value
+
+    if (seleccionEnvio == "premium") {
+        document.getElementById("costoEnvio").innerHTML = `${cartInfo[0].currency} ${subtotal * 0.15}`;
+    }
+
+    if (seleccionEnvio == "express") {
+        document.getElementById("costoEnvio").innerHTML = `${cartInfo[0].currency} ${subtotal * 0.07}`;
+    }
+
+    if (seleccionEnvio == "standard") {
+        document.getElementById("costoEnvio").innerHTML = `${cartInfo[0].currency} ${subtotal * 0.05}`;
+    }
+
+    
+}
+
+function disable(){
+    let tarjetaCredito = document.getElementById("tarjetaCredito")
+    let transBancaria = document.getElementById("transBancaria")
+
+    if (transBancaria.checked == true ) {
+        document.getElementById("numeroTarjeta").setAttribute("disabled","")
+        document.getElementById("vencimiento").setAttribute("disabled","")
+        document.getElementById("codigoseguridad").setAttribute("disabled","")
+        document.getElementById("tarjetaCredito").setAttribute("disabled", "")
+    } else {
+        document.getElementById("numeroTarjeta").removeAttribute("disabled","")
+        document.getElementById("vencimiento").removeAttribute("disabled","")
+        document.getElementById("codigoseguridad").removeAttribute("disabled","")
+        document.getElementById("tarjetaCredito").removeAttribute("disabled","")
+    }
+
+    if (tarjetaCredito.checked == true ) {
+        document.getElementById("numeroCuenta").setAttribute("disabled", "")
+        document.getElementById("transBancaria").setAttribute("disabled", "")
+        
+    } else {
+        document.getElementById("numeroCuenta").removeAttribute("disabled", "")
+        document.getElementById("transBancaria").removeAttribute("disabled", "")
+    }
+
+}
+
+function cartValidation() {
+    let transBancaria = document.getElementById("transBancaria")
+    let tarjetaCredito = document.getElementById("tarjetaCredito")
+    let cantidadProductos = document.getElementById("cantidad")
+    let resultado = true
+
+    if (!(cantidadProductos.value > 0)) {
+        cantidad.classList.add("border")
+        cantidad.classList.add("border-danger")
+        resultado = false
+    }
+
+    else {
+        cantidad.classList.remove("border")
+        cantidad.classList.remove("border-danger")
+
+    }
+
+    if (!tarjetaCredito.checked && !transBancaria.checked) {
+        resultado = false
+        document.getElementById("formaPago").classList.replace("btn-dark", "btn-outline-danger");
+        document.getElementById("feedback-forma-pago").style.display = "inline";
+        
+    } else {
+        document.getElementById("formaPago").classList.replace("btn-outline-danger", "btn-dark");
+        document.getElementById("feedback-forma-pago").style.display = "none";
+    }
+
+    return resultado
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -64,6 +145,40 @@ document.addEventListener("DOMContentLoaded", () => {
           showCartInfo()
           
         }
-})
+    })
+
+    document.getElementById("envio").addEventListener("change", () => {
+        showCostoEnvio()
+    })
+
+    document.getElementById("tarjetaCredito").addEventListener("click", () => {
+        disable()
+    })
+
+    document.getElementById("transBancaria").addEventListener("click", () => {
+        disable()
+    })
+
+    document.getElementById("guardarboton").addEventListener("click", () => {
+        cartValidation()
+    })
+
+    document.getElementById("alerta").style.display = "none"
+
+    document.getElementById("formCompra").addEventListener("submit", e => {
+        e.preventDefault(); // Para evitar refresh del form
+        if(!cartValidation() || !formCompra.checkValidity()){
+            e.stopPropagation();
+        } else {
+            setTimeout( () => {
+                document.location.reload();
+            }, 3000)
+            document.getElementById("alerta").style.display = "inline"
+        }
+
+        formCompra.classList.add('was-validated');
+
+    });
+
 });
 

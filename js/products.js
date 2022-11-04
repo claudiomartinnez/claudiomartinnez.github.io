@@ -8,7 +8,7 @@ function setProdID(id){
   location.href = "product-info.html"
 }
 
-function showProductsList() {
+function showProductsList(currentProductsArray) {
   let htmlContentToAppend = "";
 
   for (let i = 0; i < currentProductsArray.length; i++) {
@@ -41,6 +41,14 @@ function showProductsList() {
   document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
 }
 
+function searchProducts() {
+  let searchedText = document.getElementById('search').value
+  let searchedProducts = currentProductsArray.filter((producto) => {
+    return (producto.name.toLowerCase().includes(searchedText.toLowerCase()))
+  });
+
+  showProductsList(searchedProducts)
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   
@@ -48,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
   getJSONData(url).then(function (resultObj) {
     if (resultObj.status === "ok") {
       currentProductsArray = resultObj.data.products;
-      showProductsList();
+      showProductsList(currentProductsArray);
     }
   });
 
@@ -113,6 +121,11 @@ document.addEventListener("DOMContentLoaded", () => {
     
   });
 
+  document.getElementById('search').addEventListener('keyup',()=>{
+     
+    searchProducts();
+  });
+
 
 });
 
@@ -140,7 +153,6 @@ document.addEventListener("DOMContentLoaded", () =>{
 
 })
 
-console.log(showProductsList())
 
 
 

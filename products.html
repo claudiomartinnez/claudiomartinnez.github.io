@@ -64,21 +64,30 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
-          <div class="row container p-0 m-0">
-            <div class="col">
-              <p class="font-weight-normal text-end my-2">Precio</p>
+        <div class=" col-md-12 mb-1 container">
+          <div class="d-md-flex container justify-content-between p-0 m-0">
+            <div class="col-md-4 d-flex align-items-center">
+              <div class="form-floating"> 
+                <input type="search" class="form-control" id="search" placeholder="Buscar">
+                <label for="search"> Buscar </label>
+              </div>
+              <i class="fas fa-search ms-2"></i>
             </div>
-            <div class="col">
-              <input class="form-control" type="number" placeholder="min." id="rangeFilterCostMin">
-            </div>
-            <div class="col">
-              <input class="form-control" type="number" placeholder="máx." id="rangeFilterCostMax">
-            </div>
-            <div class="col-3 p-0">
-              <div class="btn-group" role="group">
-                <button class="btn btn-light btn-block" id="rangeFilterCost">Filtrar</button>
-                <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
+            <div class="col-md-8 row">
+              <div class="col">
+                <p class="font-weight-normal text-end my-2">Precio</p>
+              </div>
+              <div class="col">
+                <input class="form-control" type="number" placeholder="min." id="rangeFilterCostMin">
+              </div>
+              <div class="col">
+                <input class="form-control" type="number" placeholder="máx." id="rangeFilterCostMax">
+              </div>
+              <div class="col p-0">
+                <div class="btn-group text-end" role="group">
+                  <button class="btn btn-light btn-block" id="rangeFilterCost">Filtrar</button>
+                  <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
+                </div>
               </div>
             </div>
           </div>

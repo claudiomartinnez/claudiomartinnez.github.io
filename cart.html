@@ -9,6 +9,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+ 
 </head>
 
 <body>
@@ -63,16 +64,15 @@
                       
                     </div>
                   </div>
-                  <div class="row-lg-4 bg-grey">
+                  <form class="row-lg-4 bg-grey needs-validation" id="formCompra" novalidate>
                     <div class="p-5">
-    
                       <h5 class="text-uppercase mb-3">Tipo de envío</h5>
     
                       <div class="mb-4 pb-2">
-                        <select class="form-control">
-                          <option value="1">Premium - 2 a 5 días (15%)</option>
-                          <option value="2">Express - 5 a 8 días (7%)</option>
-                          <option value="3">Standard - 12 a 15 días (5%)</option>
+                        <select class="form-control" id="envio" required>
+                          <option value="premium" >Premium - 2 a 5 días (15%)</option>
+                          <option value="express" >Express - 5 a 8 días (7%)</option>
+                          <option value="standard" >Standard - 12 a 15 días (5%)</option>
                         </select>
                       </div>
     
@@ -80,31 +80,121 @@
     
                       <div class="mb-5">
                         <div class="form-floating mb-2">
-                          <input type="text" class="form-control" id="calle" placeholder="Calle">
+                          <input type="text" class="form-control" id="calle" placeholder="Calle" required>
                           <label for="text">Calle</label>
+                          <div class="invalid-feedback">
+                            Por favor ingresar una calle
+                          </div>
                         </div>
                         <div class="form-floating mb-2">
-                          <input type="number" class="form-control" id="numero-calle" placeholder="numero">
+                          <input type="number" class="form-control" id="numero-calle" placeholder="numero" required>
                           <label for="number">Numero</label>
+                          <div class="invalid-feedback">
+                            Por favor ingresar un numero
+                          </div>
                         </div>
                         <div class="form-floating mb-2">
-                          <input type="text" class="form-control" id="esquina" placeholder="esquina">
+                          <input type="text" class="form-control" id="esquina" placeholder="esquina" required>
                           <label for="text">Esquina</label>
+                          <div class="invalid-feedback">
+                            Por favor ingresar una esquina
+                          </div>
                         </div>
                       </div>
     
                       <hr class="my-4">
-    
+
                       <div class="d-flex justify-content-between mb-5">
+                        <h6 class="text-uppercase">Subtotal</h6>
+                        <h6 id="subtotal2"></h6>
+                      </div>
+                      <div class="d-flex justify-content-between mb-5">
+                        <h6 class="text-uppercase">Costo de envío</h6>
+                        <h6 id="costoEnvio"></h6>
+                      </div>
+                      <div class="d-flex justify-content-between mb-4">
                         <h5 class="text-uppercase">Total con envío</h5>
                         <h5 id="total"></h5>
                       </div>
-    
-                      <button type="button" class="btn btn-dark btn-block btn-lg"
-                        data-mdb-ripple-color="dark">Comprar</button>
-    
+
+                      <hr class="my-4">
+
+                      <button type="button" class="btn btn-dark" id="formaPago" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Seleccionar forma de pago
+                      </button> <span class="invalid-feedback" id="feedback-forma-pago">
+                        Debe seleccionar una forma de pago.
+                      </span>
+                      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Forma de pago</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <form class="mt-2">
+                                <div class="form-check">
+                                  <input type="checkbox" class="form-check-input" id="tarjetaCredito"/>
+                                  <label class="form-check-label" for="tarjetaCredito">
+                                    <i class="fas fa-credit-card"></i> Tarjeta de crédito
+                                  </label>
+                                </div>
+                                
+          
+                                <div class="form-floating mb-2 mt-4">
+                                  <input type="number" id="numeroTarjeta" class="form-control" placeholder="Número de tarjeta" required />
+                                  <label class="form-label" for="numeroTarjeta">Número de tarjeta</label>
+                                </div>
+          
+                                <div class="row mb-4">
+                                  <div class="col-md-6">
+                                    <div class="form-floating mb-2 mt-2">
+                                      <input type="text" id="vencimiento" class="form-control" placeholder="MM/AA" required/>
+                                      <label class="form-label" for="vencimiento">Vencimiento (MM/AA)</label>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="form-floating mb-2 mt-2">
+                                      <input type="password" id="codigoseguridad" class="form-control" placeholder="Código de seguridad" required />
+                                      <label class="form-label" for="codigoseguridad">Código de seguridad</label>
+
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <hr class="my-4">
+
+                                <div class="form-check">
+                                  <input type="checkbox" class="form-check-input" id="transBancaria">
+                                  <label class="form-check-label" for="transBancaria">
+                                    <i class="fas fa-university"></i> Transferencia bancaria
+                                  </label>  
+                                </div>
+                                <div class="form-floating mb-2 mt-4">
+                                  <input type="number" id="numeroCuenta" class="form-control" placeholder="Número de cuenta" required />
+                                  <label class="form-label" for="numeroCuenta">Número de cuenta</label>
+                                </div>
+          
+                              </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-primary" id="guardarboton" data-bs-dismiss="modal">Guardar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <hr class="my-4">
+
+                      <button type="submit" class="btn btn-dark btn-block btn-lg" id="comprar" data-mdb-ripple-color="dark">
+                        Comprar
+                      </button>
+
+                      <div class="alert alert-success" role="alert" id="alerta">
+                        ¡Has comprado con éxito!
+                      </div> 
                     </div>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
