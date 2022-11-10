@@ -1,5 +1,6 @@
 let cartInfo = [];
 let subtotal = undefined;
+let total = undefined;
 
 function showCartInfo(){
     let htmlContentToAppend = "";
@@ -18,15 +19,15 @@ function showCartInfo(){
             </div>
             <div class="col-md-3 col-lg-3 col-xl-3 d-flex">
                 <button class="btn btn-link px-2"
-                onclick="this.parentNode.querySelector('input[type=number]').stepDown();updateValue()">
+                onclick="this.parentNode.querySelector('input[type=number]').stepDown();calcularYMostrarCostos()">
                 <i class="fas fa-minus"></i>
                 </button>
 
-                <input id="cantidad"  name="quantity" value="${cart.count}" type="number" onchange="updateValue()"
+                <input id="cantidad"  name="quantity" value="${cart.count}" type="number" onchange="calcularYMostrarCostos()"
                 class="form-control form-control-sm" />
 
                 <button class="btn btn-link px-2"
-                onclick="this.parentNode.querySelector('input[type=number]').stepUp();updateValue()">
+                onclick="this.parentNode.querySelector('input[type=number]').stepUp();calcularYMostrarCostos()">
                 <i class="fas fa-plus"></i>
                 </button>
             </div>
@@ -43,21 +44,37 @@ function showCartInfo(){
     }
 
     document.getElementById("cart-info").innerHTML = htmlContentToAppend;
-    document.getElementById("total").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
-    document.getElementById("subtotal2").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
+    
+}
+
+function calcularCostos() {
+    let cantidad = document.getElementById("cantidad").value;
+    subtotal = cantidad * cartInfo[0].unitCost;
+
+    let seleccionEnvio = document.getElementById("envio").value
+    if (seleccionEnvio == "premium") {
+        total = subtotal + (subtotal * 0.15)
+    }
+    if (seleccionEnvio == "express") {
+        total = subtotal + (subtotal * 0.07)
+    }
+    if (seleccionEnvio == "standard") {
+        total = subtotal + (subtotal * 0.05)
+    }
+}
+
+function mostrarCostos(){
+    document.getElementById("subtotal").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
     showCostoEnvio()
+    document.getElementById("subtotal2").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
+    document.getElementById("total").innerHTML = `${cartInfo[0].currency} ${total}`;
 
 }
 
 
-function updateValue(){
-    let cantidad = document.getElementById("cantidad").value;
-    subtotal = cantidad * cartInfo[0].unitCost;
-    document.getElementById("subtotal").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
-    showCostoEnvio()
-    document.getElementById("subtotal2").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
-    document.getElementById("total").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
-
+function calcularYMostrarCostos(){
+    calcularCostos()
+    mostrarCostos()
 }
 
 function showCostoEnvio() {
@@ -140,15 +157,15 @@ document.addEventListener("DOMContentLoaded", () => {
     let cartURL = CART_INFO_URL + "25801" + EXT_TYPE;
     getJSONData(cartURL).then(function (resultObj) {
         if (resultObj.status === "ok") {
-          cartInfo = resultObj.data.articles;
-          subtotal = cartInfo[0].count * cartInfo[0].unitCost;
-          showCartInfo()
+            cartInfo = resultObj.data.articles;
+            showCartInfo()
+            calcularYMostrarCostos()
           
         }
     })
 
     document.getElementById("envio").addEventListener("change", () => {
-        showCostoEnvio()
+        calcularYMostrarCostos()
     })
 
     document.getElementById("tarjetaCredito").addEventListener("click", () => {
