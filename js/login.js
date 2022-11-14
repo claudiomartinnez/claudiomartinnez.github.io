@@ -35,10 +35,11 @@ function login (){
                     let usuarioNuevo = [email]
                     usuarios.push(usuarioNuevo)
                     localStorage.setItem('users', JSON.stringify(usuarios))
+                    location.href='index.html';
                     
                 }
              
-                location.href='index.html';
+                // location.href='index.html';
             }
           })
         
