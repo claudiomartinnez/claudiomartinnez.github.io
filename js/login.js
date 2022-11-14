@@ -28,7 +28,7 @@ function login (){
             confirmButtonText: 'Ok'
           }).then((result) => {
             if (result.isConfirmed) {
-                localStorage.setItem("usuario", email) ;
+                localStorage.setItem("email", email) ;
                 location.href='index.html';
             }
           })

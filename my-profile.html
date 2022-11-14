@@ -7,6 +7,7 @@
   <title>eMercado - Todo lo que busques está aquí</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <style>
     .bd-placeholder-img {
@@ -56,11 +57,64 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="row mx-5 my-5">
+      <div class="col-xl-4">
+          <div class="card mb-4 mb-xl-0">
+              <div class="card-header">Imagen de perfil</div>
+              <div class="card-body text-center">
+                  <img class="img-account-profile rounded-circle mb-2" src="">
+                  <div class="small font-italic text-muted mb-4">Imagen base64</div>
+                  <button class="btn btn-primary" type="button">Subir imagen</button>
+              </div>
+          </div>
       </div>
-    </div>
+      <div class="col-xl-8">
+          <div class="card mb-4">
+              <div class="card-header">Perfil</div>
+              <div class="card-body">
+                  <form id="formUsuario" novalidate>
+                      <div class="row gx-3 mb-3">
+                          <div class="col-md-6">
+                            <label class="small mb-1" for="primernombre">Primer nombre </i></label>
+                            <input class="form-control" id="primernombre" type="text" placeholder="Ingresa tu primer nombre" required>
+                            <div class="invalid-feedback">
+                              Debe rellenar este campo
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <label class="small mb-1" for="segundonombre">Segundo nombre</label>
+                            <input class="form-control" id="segundonombre" type="text" placeholder="Ingresa tu segundo nombre">
+                          </div>
+                      </div>
+                      <div class="row gx-3 mb-3">
+                          <div class="col-md-6">
+                            <label class="small mb-1" for="primerapellido">Primer apellido </label>
+                            <input class="form-control" id="primerapellido" type="text" placeholder="Ingresa tu primer apellido" required>
+                            <div class="invalid-feedback">
+                              Debe rellenar este campo
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <label class="small mb-1" for="segundoapellido">Segundo apellido</label>
+                            <input class="form-control" id="segundoapellido" type="text" placeholder="Ingresa tu segundo apellido">
+                          </div>
+                      </div>
+                      <div class="row gx-3 mb-3">
+                          <div class="col-md-6">
+                            <label class="small mb-1" for="email">E-mail </label>
+                            <input class="form-control" id="email" type="email" disabled>
+                          </div>
+                          <div class="col-md-6">
+                              <label class="small mb-1" for="telefono">Teléfono de contacto</label>
+                              <input class="form-control" id="telefono" type="text"  placeholder="Ingresa tu telefono">
+                          </div>
+                      </div>
+                      <button class="btn btn-primary" type="submit" id="guardar">Guardar cambios</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
   </main>
   <footer class="text-muted">
     <div class="container">

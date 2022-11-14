@@ -1,5 +1,6 @@
 let cartInfo = [];
 let subtotal = undefined;
+let costoEnvio = undefined;
 let total = undefined;
 
 function showCartInfo(){
@@ -53,19 +54,23 @@ function calcularCostos() {
 
     let seleccionEnvio = document.getElementById("envio").value
     if (seleccionEnvio == "premium") {
-        total = subtotal + (subtotal * 0.15)
+        costoEnvio = subtotal * 0.15;
+        total = subtotal + costoEnvio;
     }
     if (seleccionEnvio == "express") {
-        total = subtotal + (subtotal * 0.07)
+        costoEnvio = subtotal * 0.07;
+        total = subtotal + costoEnvio
     }
     if (seleccionEnvio == "standard") {
-        total = subtotal + (subtotal * 0.05)
+        costoEnvio = subtotal * 0.05;
+        total = subtotal + costoEnvio
     }
+
 }
 
 function mostrarCostos(){
     document.getElementById("subtotal").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
-    showCostoEnvio()
+    document.getElementById("costoEnvio").innerHTML = `${cartInfo[0].currency} ${costoEnvio}`
     document.getElementById("subtotal2").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
     document.getElementById("total").innerHTML = `${cartInfo[0].currency} ${total}`;
 
@@ -75,24 +80,6 @@ function mostrarCostos(){
 function calcularYMostrarCostos(){
     calcularCostos()
     mostrarCostos()
-}
-
-function showCostoEnvio() {
-    let seleccionEnvio = document.getElementById("envio").value
-
-    if (seleccionEnvio == "premium") {
-        document.getElementById("costoEnvio").innerHTML = `${cartInfo[0].currency} ${subtotal * 0.15}`;
-    }
-
-    if (seleccionEnvio == "express") {
-        document.getElementById("costoEnvio").innerHTML = `${cartInfo[0].currency} ${subtotal * 0.07}`;
-    }
-
-    if (seleccionEnvio == "standard") {
-        document.getElementById("costoEnvio").innerHTML = `${cartInfo[0].currency} ${subtotal * 0.05}`;
-    }
-
-    
 }
 
 function disable(){
