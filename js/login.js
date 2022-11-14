@@ -38,8 +38,8 @@ function login (){
                     location.href='index.html';
                     
                 }
-             
-                // location.href='index.html';
+
+               
             }
           })
         
