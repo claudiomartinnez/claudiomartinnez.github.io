@@ -40,3 +40,10 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem('users')==null) {
+    localStorage.setItem('users', '[]')
+  }
+  
+})

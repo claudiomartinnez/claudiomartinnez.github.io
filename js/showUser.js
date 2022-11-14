@@ -1,9 +1,6 @@
 // Mostrar usuario
 document.addEventListener('DOMContentLoaded', ()=>{
-    if (localStorage.getItem('users')==null) {
-        localStorage.setItem('users', '[]')
-        
-    }
+  
     
     let usuario = localStorage.getItem("email");
     document.getElementById("usuario").innerHTML = usuario;
@@ -14,7 +11,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     
     //Boton de log-out
     document.getElementById("logout").addEventListener("click", function() {
-        localStorage.clear()
+        localStorage.removeItem('email')
         location.href= "login.html"
     });
     

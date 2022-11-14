@@ -29,6 +29,15 @@ function login (){
           }).then((result) => {
             if (result.isConfirmed) {
                 localStorage.setItem("email", email) ;
+                let usuarios = JSON.parse(localStorage.getItem('users'))
+                let usuarioExistente = usuarios.find((usuario) => usuario[0]==email)
+                if (!usuarioExistente) {
+                    let usuarioNuevo = [email]
+                    usuarios.push(usuarioNuevo)
+                    localStorage.setItem('users', JSON.stringify(usuarios))
+                    
+                }
+             
                 location.href='index.html';
             }
           })
