@@ -16,8 +16,4 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 
-// Me lleva al login porque no ingrese ningun "usuario"
-if (localStorage.getItem("usuario")===null){
-    location.href= "login.html"
-}
 
