@@ -106,6 +106,19 @@ function showComments() {
   document.getElementById("comments").innerHTML = htmlContentToAppend;
 }
 
+function agregarComentario(){
+  let fecha = new Date();
+  let fechaHoy = fecha.getFullYear() + "-" + parseInt(fecha.getMonth()+ 1) + "-" + fecha.getDay() + " " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
+  let nombreUsuario = localStorage.getItem('email')
+  let nuevoComentario = {};
+  nuevoComentario.user = nombreUsuario.substring(0, nombreUsuario.indexOf("@"));
+  nuevoComentario.description = document.getElementById('comentario').value
+  nuevoComentario.dateTime = fechaHoy
+  nuevoComentario.score = document.getElementById('puntuacion').value
+  commentsArray.push(nuevoComentario)
+  showComments()
+}
+
 function showRelatedProducts() {
   let htmlContentToAppend = "";
   for (i = 0; i < relatedProducts.length; i++) {
@@ -154,4 +167,8 @@ document.addEventListener("DOMContentLoaded", () => {
       showComments();
     }
   });
+
+  document.getElementById('comentar').addEventListener('click', () =>{
+    agregarComentario()
+  })
 });
