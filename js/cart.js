@@ -24,7 +24,7 @@ function showCartInfo(){
                 <i class="fas fa-minus"></i>
                 </button>
 
-                <input id="cantidad"  name="quantity" value="${cart.count}" type="number" onchange="calcularYMostrarCostos()"
+                <input id="cantidad${i}"  name="quantity" value="${cart.count}" type="number" onchange="calcularYMostrarCostos()"
                 class="form-control form-control-sm" />
 
                 <button class="btn btn-link px-2"
@@ -33,7 +33,7 @@ function showCartInfo(){
                 </button>
             </div>
             <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                <h6 class="mb-0" id="subtotal">${cart.currency} ${cart.unitCost} </h6>
+                <h6 class="mb-0" id="subtotal${i}">${cart.currency} ${cart.unitCost} </h6>
             </div>
             <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                 <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
@@ -49,8 +49,11 @@ function showCartInfo(){
 }
 
 function calcularCostos() {
-    let cantidad = document.getElementById("cantidad").value;
-    subtotal = cantidad * cartInfo[0].unitCost;
+    subtotal = 0;
+    for (let i=0; i < cartInfo.length; i++) {
+        let cantidad = document.getElementById("cantidad"+i).value
+        subtotal += cantidad * cartInfo[i].unitCost    
+    }
 
     let seleccionEnvio = document.getElementById("envio").value
     if (seleccionEnvio == "premium") {
@@ -69,9 +72,15 @@ function calcularCostos() {
 }
 
 function mostrarCostos(){
-    document.getElementById("subtotal").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
+    
+    for (let i=0; i < cartInfo.length; i++) {
+        let cantidad = document.getElementById("cantidad"+i).value
+        precioProducto = cantidad * cartInfo[i].unitCost
+        document.getElementById("subtotal"+i).innerHTML = precioProducto  
+    }
+
     document.getElementById("costoEnvio").innerHTML = `${cartInfo[0].currency} ${costoEnvio}`
-    document.getElementById("subtotal2").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
+    document.getElementById("segundoSubtotal").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
     document.getElementById("total").innerHTML = `${cartInfo[0].currency} ${total}`;
 
 }
@@ -141,15 +150,11 @@ function cartValidation() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    let cartURL = CART_INFO_URL + "25801" + EXT_TYPE;
-    getJSONData(cartURL).then(function (resultObj) {
-        if (resultObj.status === "ok") {
-            cartInfo = resultObj.data.articles;
-            showCartInfo()
-            calcularYMostrarCostos()
+    cartInfo = JSON.parse(localStorage.getItem('carrito'));
+    showCartInfo()
+    calcularYMostrarCostos()
           
-        }
-    })
+
 
     document.getElementById("envio").addEventListener("change", () => {
         calcularYMostrarCostos()
@@ -166,8 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("guardarboton").addEventListener("click", () => {
         cartValidation()
     })
-
-    document.getElementById("alerta").style.display = "none"
 
     document.getElementById("formCompra").addEventListener("submit", e => {
         e.preventDefault(); // Para evitar refresh del form

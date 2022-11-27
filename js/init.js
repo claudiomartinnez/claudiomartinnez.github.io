@@ -46,4 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem('users', '[]')
   }
   
+  if (localStorage.getItem('carrito')==null){
+    localStorage.setItem('carrito', '[]')
+  }
+  
 })

@@ -60,7 +60,7 @@ function showProductInfo() {
             </div>
             <p class="lead">${productInfo.description}</p>
             <div class = "d-flex">
-            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+            <button class="btn btn-outline-dark flex-shrink-0" id="agregaralcarrito" type="button">
               <i class="fas fa-shopping-cart"></i>
                Añadir al carrito
             </button>
@@ -71,6 +71,10 @@ function showProductInfo() {
     </section>`;
 
   document.getElementById("prod-info-container").innerHTML = htmlContentToAppend;
+
+  document.getElementById("agregaralcarrito").addEventListener('click', () =>{
+    agregarAlCarrito()
+  })
 
 
 }
@@ -117,6 +121,43 @@ function agregarComentario(){
   nuevoComentario.score = document.getElementById('puntuacion').value
   commentsArray.push(nuevoComentario)
   showComments()
+}
+
+function agregarAlCarrito(){
+  let carrito = JSON.parse(localStorage.getItem('carrito'))
+  let productoExistente = carrito.find((producto) => producto.id==productInfo.id)
+  if (!productoExistente){
+    let nuevoProducto = {
+      "id": productInfo.id,
+      "name": productInfo.name,
+      "count": 1,
+      "unitCost": productInfo.cost,
+      "currency": productInfo.currency,
+      "image": productInfo.images[0]
+    }
+    if (nuevoProducto.currency=="UYU"){
+      nuevoProducto.currency="USD"
+      nuevoProducto.unitCost = nuevoProducto.unitCost/ 40
+
+    }
+
+    carrito.push(nuevoProducto)
+    localStorage.setItem('carrito', JSON.stringify(carrito))
+    Swal.fire({
+      icon: 'success',
+      title: 'El producto se ha añadido al carrito ',
+      showConfirmButton: false,
+      timer: 2000
+    })
+
+  } else {
+    Swal.fire('El producto ya está en el carrito')
+  }
+
+  console.log(productoExistente)
+  console.log(carrito)
+  
+
 }
 
 function showRelatedProducts() {
@@ -171,4 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById('comentar').addEventListener('click', () =>{
     agregarComentario()
   })
+
+  
 });
