@@ -153,9 +153,6 @@ function agregarAlCarrito(){
   } else {
     Swal.fire('El producto ya está en el carrito')
   }
-
-  console.log(productoExistente)
-  console.log(carrito)
   
 
 }

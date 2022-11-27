@@ -35,8 +35,8 @@ function showCartInfo(){
             <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                 <h6 class="mb-0" id="subtotal${i}">${cart.currency} ${cart.unitCost} </h6>
             </div>
-            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
+            <div class="col-md-1 col-lg-1 col-xl-1 text-end"> 
+                 <span onclick="eliminarProducto(${i})" class="text-muted "><i class="fas fa-times"></i></span>
             </div>
             </div>
     
@@ -76,12 +76,12 @@ function mostrarCostos(){
     for (let i=0; i < cartInfo.length; i++) {
         let cantidad = document.getElementById("cantidad"+i).value
         precioProducto = cantidad * cartInfo[i].unitCost
-        document.getElementById("subtotal"+i).innerHTML = precioProducto  
+        document.getElementById("subtotal"+i).innerHTML = `USD ${precioProducto}`  
     }
-
-    document.getElementById("costoEnvio").innerHTML = `${cartInfo[0].currency} ${costoEnvio}`
-    document.getElementById("segundoSubtotal").innerHTML = `${cartInfo[0].currency} ${subtotal}`;
-    document.getElementById("total").innerHTML = `${cartInfo[0].currency} ${total}`;
+    
+    document.getElementById("costoEnvio").innerHTML = `USD ${costoEnvio}`
+    document.getElementById("segundoSubtotal").innerHTML = `USD ${subtotal}`;
+    document.getElementById("total").innerHTML = `USD ${total}`;
 
 }
 
@@ -89,6 +89,16 @@ function mostrarCostos(){
 function calcularYMostrarCostos(){
     calcularCostos()
     mostrarCostos()
+}
+
+function eliminarProducto(posicion){
+    cartInfo.splice(posicion,1)
+    showCartInfo()
+    calcularYMostrarCostos()
+    let carrito = JSON.parse(localStorage.getItem('carrito'))
+    carrito.splice(posicion,1)
+    localStorage.setItem('carrito', JSON.stringify(carrito))
+
 }
 
 function disable(){
