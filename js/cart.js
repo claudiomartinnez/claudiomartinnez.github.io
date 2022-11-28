@@ -24,7 +24,7 @@ function showCartInfo(){
                 <i class="fas fa-minus"></i>
                 </button>
 
-                <input id="cantidad${i}"  name="quantity" value="${cart.count}" type="number" onchange="calcularYMostrarCostos()"
+                <input id="cantidad${i}"  min=1 name="quantity" value="${cart.count}" type="number" onchange="calcularYMostrarCostos()"
                 class="form-control form-control-sm" />
 
                 <button class="btn btn-link px-2"
@@ -131,20 +131,7 @@ function disable(){
 function cartValidation() {
     let transBancaria = document.getElementById("transBancaria")
     let tarjetaCredito = document.getElementById("tarjetaCredito")
-    let cantidadProductos = document.getElementById("cantidad")
     let resultado = true
-
-    if (!(cantidadProductos.value > 0)) {
-        cantidad.classList.add("border")
-        cantidad.classList.add("border-danger")
-        resultado = false
-    }
-
-    else {
-        cantidad.classList.remove("border")
-        cantidad.classList.remove("border-danger")
-
-    }
 
     if (!tarjetaCredito.checked && !transBancaria.checked) {
         resultado = false
